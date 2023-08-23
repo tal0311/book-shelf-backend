@@ -1,8 +1,9 @@
-const logger = require('../../services/logger.service')
-const userService = require('../user/user.service')
-const authService = require('../auth/auth.service')
-const socketService = require('../../services/socket.service')
-const commentService = require('./comment.service')
+import logger from '../../services/logger.service.js';
+import userService from '../user/user.service.js';
+import authService from '../auth/auth.service.js';
+import socketService from '../../services/socket.service.js';
+import commentService from './comment.service.js';
+
 
 async function getComments(req, res) {
     try {
@@ -71,7 +72,7 @@ async function addComment(req, res) {
     }
 }
 
-module.exports = {
+export default {
     getComments,
     deleteComment,
     addComment

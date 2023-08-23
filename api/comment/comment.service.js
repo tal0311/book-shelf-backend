@@ -1,7 +1,8 @@
-const dbService = require('../../services/db.service')
-const logger = require('../../services/logger.service')
-const ObjectId = require('mongodb').ObjectId
-const asyncLocalStorage = require('../../services/als.service')
+import dbService from '../../services/db.service.js';
+import logger from '../../services/logger.service.js';
+import { ObjectId } from 'mongodb';
+import asyncLocalStorage from '../../services/als.service.js';
+
 
 async function query(filterBy = {}) {
     try {
@@ -92,7 +93,7 @@ function _buildCriteria(filterBy) {
     return criteria
 }
 
-module.exports = {
+export default {
     query,
     remove,
     add

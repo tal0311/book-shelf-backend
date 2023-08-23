@@ -1,7 +1,8 @@
-const express = require('express')
-const { requireAuth, requireAdmin } = require('../../middlewares/requireAuth.middleware')
-const { log } = require('../../middlewares/logger.middleware')
-const { addComment, getComments, deleteComment } = require('./comment.controller')
+import express from 'express';
+import { requireAuth, requireAdmin } from '../../middlewares/requireAuth.middleware.js';
+import { log } from '../../middlewares/logger.middleware.js';
+import { addComment, getComments, deleteComment } from './comment.controller.js';
+
 const router = express.Router()
 
 // middleware that is specific to this router
@@ -11,4 +12,4 @@ router.get('/', log, getComments)
 router.post('/', log, requireAuth, addComment)
 router.delete('/:id', requireAuth, deleteComment)
 
-module.exports = router
+export default router
