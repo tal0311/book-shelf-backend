@@ -3,11 +3,13 @@ import cors from 'cors';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import config from './config/index.js';
+import { createServer } from 'http';
 
 
 
 const app = express()
-const http = require('http').createServer(app)
+const http = createServer(app);
+
 
 
 // Express App Config
@@ -31,7 +33,7 @@ import userRoutes from './api/user/user.routes.js';
 import shelfRoutes from './api/shelf/shelf.routes.js';
 // import notesRoutes from './api/notification/notes.routes.js';
 // import msgRoutes from './api/msg/msg.routes.js';
-// import { setupSocketAPI } from './services/socket.service.js';
+import { setupSocketAPI } from './services/socket.service.js';
 
 
 // routes
@@ -54,7 +56,7 @@ app.get('/**', (req, res) => {
 })
 
 
-import logger from './services/logger.service';
+import logger from './services/logger.service.js';
 
 const port = process.env.PORT || 3030
 http.listen(port, () => {

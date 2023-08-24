@@ -2,7 +2,7 @@ import authService from './auth.service.js';
 import logger from '../../services/logger.service.js';
 
 // TODO: make sure passwords are not logged or getting to the FE
-async function login(req, res) {
+export async function login(req, res) {
     const { username, password } = req.body
     try {
         const user = await authService.login(username, password)
@@ -18,7 +18,7 @@ async function login(req, res) {
     }
 }
 
-async function signup(req, res) {
+export async function signup(req, res) {
     try {
         const credentials = req.body
         const account = await authService.signup(credentials)
@@ -35,7 +35,7 @@ async function signup(req, res) {
     }
 }
 
-async function logout(req, res) {
+export async function logout(req, res) {
     try {
         res.clearCookie('loginToken')
         res.send({ msg: 'Logged out successfully' })
@@ -45,8 +45,8 @@ async function logout(req, res) {
 }
 
 
-export default {
-    login,
-    signup,
-    logout
-};
+// export default {
+//     login,
+//     signup,
+//     logout
+// };

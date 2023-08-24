@@ -4,7 +4,8 @@ import logger from '../../services/logger.service.js';
 import utilService from '../../services/util.service.js';
 import userService from '../user/user.service.js';
 import socketService from '../../services/socket.service.js';
-import { ObjectId } from 'mongodb';
+import pkg from 'mongodb';
+const { ObjectId } = pkg;
 
 
 async function query(filterBy = { txt: '', userFilter: '', userId: '' }) {

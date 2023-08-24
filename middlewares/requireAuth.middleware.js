@@ -1,10 +1,11 @@
-const authService = require('../api/auth/auth.service')
-const logger = require('../services/logger.service')
-const config = require('../config')
-const asyncLocalStorage = require('../services/als.service')
-const shelfService = require('../api/shelf/shelf.service')
+import authService from '../api/auth/auth.service.js';
+import logger from '../services/logger.service.js';
+import config from '../config/index.js';
+import asyncLocalStorage from '../services/als.service.js';
+import shelfService from '../api/shelf/shelf.service.js';
 
-function requireAuth(req, res, next) {
+
+export function requireAuth(req, res, next) {
   const { loggedinUser } = asyncLocalStorage.getStore()
   console.log('loggedinUser', loggedinUser);
   logger.debug('MIDDLEWARE', loggedinUser)
@@ -19,7 +20,7 @@ function requireAuth(req, res, next) {
   next()
 }
 
-function requireAdmin(req, res, next) {
+export function requireAdmin(req, res, next) {
   const { loggedinUser } = asyncLocalStorage.getStore()
   if (!loggedinUser) return res.status(401).send('Not Authenticated')
   if (!loggedinUser.isAdmin) {
@@ -30,7 +31,7 @@ function requireAdmin(req, res, next) {
   next()
 }
 
-async function requireOwner(req, res, next) {
+export async function requireOwner(req, res, next) {
   const { loggedinUser } = asyncLocalStorage.getStore()
   if (!loggedinUser) return res.status(401).send('Not Authenticated')
   const shelf = await shelfService.getById(req.params.id)
@@ -45,8 +46,8 @@ async function requireOwner(req, res, next) {
 
 // module.exports = requireAuth
 
-module.exports = {
-  requireAuth,
-  requireAdmin,
-  requireOwner
-}
+// export default {
+//   requireAuth,
+//   requireAdmin,
+//   requireOwner
+// }

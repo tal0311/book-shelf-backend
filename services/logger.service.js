@@ -1,7 +1,8 @@
-const fs = require('fs')
-const asyncLocalStorage = require('./als.service')
-const utilService = require('./util.service')
-const cc = require("node-console-colors");
+import fs from 'fs';
+import asyncLocalStorage from './als.service.js';
+import utilService from './util.service.js';
+import cc from 'node-console-colors';
+
 
 const logsDir = './logs'
 if (!fs.existsSync(logsDir)) {
@@ -48,7 +49,7 @@ function getConsoleColor(level) {
     return colorOps[level] || 'fg_black'
 }
 
-module.exports = {
+export default {
     debug(...args) {
         if (process.env.NODE_NEV === 'production') return
         doLog('DEBUG', ...args)

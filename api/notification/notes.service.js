@@ -1,7 +1,8 @@
 const dbService = require('../../services/db.service')
 const logger = require('../../services/logger.service')
 const utilService = require('../../services/util.service')
-const ObjectId = require('mongodb').ObjectId
+import pkg from 'mongodb';
+const { ObjectId } = pkg;
 
 async function query(filterBy = { txt: '' }) {
     try {
@@ -47,7 +48,7 @@ async function add(note) {
 }
 
 
-module.exports = {
+export default {
     query,
     add,
     getById

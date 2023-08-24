@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   dbURL: 'mongodb+srv://talamit0311:1234@cluster0.ciif5cn.mongodb.net/?retryWrites=true&w=majority',
   dbName: 'bookShelf_db',
   corseOptions: {

@@ -1,10 +1,10 @@
-const logger = require('../services/logger.service')
+import logger from '../services/logger.service.js'
 
-async function log(req, res, next) {
+export async function log(req, res, next) {
   // logger.info('Sample Logger Middleware')
   next()
 }
 
-module.exports = {
-  log
-}
+// export default {
+//   log
+// }

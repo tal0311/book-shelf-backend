@@ -1,10 +1,12 @@
-const MongoClient = require('mongodb').MongoClient
+import pkg from 'mongodb';
+const { MongoClient } = pkg;
 
-const config = require('../config')
-// console.log('config:', config)
-const logger = require('./logger.service')
+import config from '../config/index.js';
 
-module.exports = {
+import logger from './logger.service.js';
+
+
+export default {
     getCollection
 }
 

@@ -1,6 +1,6 @@
-const authService = require('../api/auth/auth.service')
-const asyncLocalStorage = require('../services/als.service')
-const logger = require('./../services/logger.service')
+import authService from '../api/auth/auth.service.js';
+import asyncLocalStorage from '../services/als.service.js';
+import logger from './../services/logger.service.js';
 
 // TODO: SET BETTER LOGIC HERE TO SUPPORT OTHER COOKIES
 async function setupAsyncLocalStorage(req, res, next) {
@@ -17,5 +17,5 @@ async function setupAsyncLocalStorage(req, res, next) {
   })
 }
 
-module.exports = setupAsyncLocalStorage
+export default setupAsyncLocalStorage
 

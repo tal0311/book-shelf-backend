@@ -3,7 +3,7 @@ import logger from '../../services/logger.service.js';
 import { getByUsername } from '../user/user.service.js';
 
 
-async function getShelves(req, res) {
+export async function getShelves(req, res) {
   try {
     logger.info('Getting shelves')
     // get filter from query params
@@ -18,7 +18,7 @@ async function getShelves(req, res) {
   }
 }
 
-async function getShelfById(req, res) {
+export async function getShelfById(req, res) {
   try {
     const shelfId = req.params.id
     const shelf = await shelfService.getById(shelfId)
@@ -30,7 +30,7 @@ async function getShelfById(req, res) {
   }
 }
 
-async function addShelf(req, res) {
+export async function addShelf(req, res) {
 
 
   const { loggedinUser } = req
@@ -55,7 +55,7 @@ async function addShelf(req, res) {
   }
 }
 
-async function updateShelf(req, res) {
+export async function updateShelf(req, res) {
   try {
     const shelf = req.body
     const updatedshelf = await shelfService.update(shelf)
@@ -67,7 +67,7 @@ async function updateShelf(req, res) {
   }
 }
 
-async function removeShelf(req, res) {
+export async function removeShelf(req, res) {
   try {
     const shelfId = req.params.id
     const removedId = await shelfService.remove(shelfId)
@@ -79,7 +79,7 @@ async function removeShelf(req, res) {
   }
 }
 
-async function addShelfComment(req, res) {
+export async function addShelfComment(req, res) {
   const { loggedinUser } = req
 
   try {
@@ -101,7 +101,7 @@ async function addShelfComment(req, res) {
   }
 }
 
-async function addShelfLike(req, res) {
+export async function addShelfLike(req, res) {
   const { id: shelfId } = req.params
   let { loggedinUser } = req
   if (!loggedinUser) loggedinUser = global.defaultUser
@@ -118,12 +118,12 @@ async function addShelfLike(req, res) {
 }
 
 
-export default {
-  getShelves,
-  getShelfById,
-  addShelf,
-  updateShelf,
-  removeShelf,
-  addShelfComment,
-  addShelfLike
-}
+// export default {
+//   getShelves,
+//   getShelfById,
+//   addShelf,
+//   updateShelf,
+//   removeShelf,
+//   addShelfComment,
+//   addShelfLike
+// }

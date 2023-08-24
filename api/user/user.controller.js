@@ -3,7 +3,7 @@ import socketService from '../../services/socket.service.js';
 import logger from '../../services/logger.service.js';
 
 
-async function getUser(req, res) {
+export async function getUser(req, res) {
     try {
         const user = await userService.getById(req.params.id)
         res.send(user)
@@ -13,7 +13,7 @@ async function getUser(req, res) {
     }
 }
 
-async function getUsers(req, res) {
+export async function getUsers(req, res) {
     try {
         const filterBy = {
             txt: req.query?.txt || '',
@@ -26,7 +26,7 @@ async function getUsers(req, res) {
     }
 }
 
-async function deleteUser(req, res) {
+export async function deleteUser(req, res) {
     try {
         await userService.remove(req.params.id)
         res.send({ msg: 'Deleted successfully' })
@@ -36,7 +36,7 @@ async function deleteUser(req, res) {
     }
 }
 
-async function updateUser(req, res) {
+export async function updateUser(req, res) {
     try {
         const { id } = req.params
         const currentUser = await userService.getById(id)
@@ -51,7 +51,7 @@ async function updateUser(req, res) {
     }
 }
 
-async function toggleFollow(req, res) {
+export async function toggleFollow(req, res) {
 
     const { id: userToFollowId } = req.params
     const { loggedinUser } = req
@@ -60,7 +60,7 @@ async function toggleFollow(req, res) {
 }
 
 
-async function getUserStory(req, res) {
+export async function getUserStory(req, res) {
 
     const { id: userId } = req.params
     let user = await userService.getById(userId)
@@ -69,11 +69,11 @@ async function getUserStory(req, res) {
     res.json(user)
 }
 
-export default {
-    getUser,
-    getUsers,
-    deleteUser,
-    updateUser,
-    toggleFollow,
-    getUserStory
-}
+// export default {
+//     getUser,
+//     getUsers,
+//     deleteUser,
+//     updateUser,
+//     toggleFollow,
+//     getUserStory
+// }

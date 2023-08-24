@@ -25,4 +25,4 @@ router.put('/:id/comment', requireAuth, addShelfComment)
 router.put('/:id/like', requireAuth, addShelfLike)
 router.delete('/:id', requireOwner, removeShelf)
 
-module.exports = router
+export default router

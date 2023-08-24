@@ -107,7 +107,7 @@ function randomPastTime() {
   return Date.now() - pastTime
 }
 
-module.exports = {
+export default {
   makeId,
   getRandomInt,
   debounce,

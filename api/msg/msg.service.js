@@ -1,7 +1,8 @@
 const dbService = require('../../services/db.service')
 const logger = require('../../services/logger.service')
 const utilService = require('../../services/util.service')
-const ObjectId = require('mongodb').ObjectId
+import pkg from 'mongodb';
+const { ObjectId } = pkg;
 
 // TODO : make this better aggregate
 async function query(ownerId) {

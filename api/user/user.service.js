@@ -1,7 +1,8 @@
 import asyncLocalStorage from '../../services/als.service.js';
 import dbService from '../../services/db.service.js';
 import logger from '../../services/logger.service.js';
-import { ObjectId } from 'mongodb';
+import pkg from 'mongodb';
+const { ObjectId } = pkg;
 
 
 
@@ -54,7 +55,7 @@ async function getById(userId) {
 }
 
 // this is for login
-async function getByUsername(username) {
+export async function getByUsername(username) {
     try {
         const collection = await dbService.getCollection('user')
         const user = await collection.findOne({ username })
