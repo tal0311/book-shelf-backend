@@ -28,11 +28,10 @@ global.defaultUser = {
 
 import authRoutes from './api/auth/auth.routes.js';
 import userRoutes from './api/user/user.routes.js';
-import commentRoutes from './api/comment/comment.routes.js';
 import shelfRoutes from './api/shelf/shelf.routes.js';
-import notesRoutes from './api/notification/notes.routes.js';
-import msgRoutes from './api/msg/msg.routes.js';
-import { setupSocketAPI } from './services/socket.service.js';
+// import notesRoutes from './api/notification/notes.routes.js';
+// import msgRoutes from './api/msg/msg.routes.js';
+// import { setupSocketAPI } from './services/socket.service.js';
 
 
 // routes
@@ -42,10 +41,9 @@ app.all('*', setupAsyncLocalStorage)
 
 app.use('/api/auth', authRoutes)
 app.use('/api/user', userRoutes)
-app.use('/api/comment', commentRoutes)
 app.use('/api/shelf', shelfRoutes)
-app.use('/api/note', notesRoutes)
-app.use('/api/msg', msgRoutes)
+// app.use('/api/note', notesRoutes)
+// app.use('/api/msg', msgRoutes)
 setupSocketAPI(http)
 
 // Make every server-side-route to match the index.html

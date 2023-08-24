@@ -1,6 +1,7 @@
-const express = require('express')
-const { requireAuth, requireAdmin } = require('../../middlewares/requireAuth.middleware')
-const { getUser, getUsers, deleteUser, updateUser, toggleFollow, toggleSaveshelf, getUserStory } = require('./user.controller')
+import express from 'express';
+import { requireAuth, requireAdmin } from '../../middlewares/requireAuth.middleware.js';
+import { getUser, getUsers, deleteUser, updateUser, toggleFollow, toggleSaveshelf, getUserStory } from './user.controller.js';
+
 
 const router = express.Router()
 
@@ -12,9 +13,8 @@ router.get('/:id', getUser)
 router.get('/:id/story', getUserStory)
 router.put('/:id', requireAuth, updateUser)
 router.put('/:id/follow', requireAuth, toggleFollow)
-router.put('/:id/save', requireAuth, toggleSaveshelf)
 
 // router.put('/:id',  requireAuth, updateUser)
 router.delete('/:id', requireAuth, requireAdmin, deleteUser)
 
-module.exports = router
+export default router

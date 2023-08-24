@@ -1,6 +1,7 @@
-const userService = require('./user.service')
-const socketService = require('../../services/socket.service')
-const logger = require('../../services/logger.service')
+import userService from './user.service.js';
+import socketService from '../../services/socket.service.js';
+import logger from '../../services/logger.service.js';
+
 
 async function getUser(req, res) {
     try {
@@ -58,13 +59,6 @@ async function toggleFollow(req, res) {
     res.json(updatedUser)
 }
 
-async function toggleSaveshelf(req, res) {
-
-    const { id: shelfId } = req.params
-    const { loggedinUser } = req
-    const updatedUser = await userService.toggleSaveshelf(loggedinUser._id, shelfId)
-    res.json(updatedUser)
-}
 
 async function getUserStory(req, res) {
 
@@ -75,12 +69,11 @@ async function getUserStory(req, res) {
     res.json(user)
 }
 
-module.exports = {
+export default {
     getUser,
     getUsers,
     deleteUser,
     updateUser,
     toggleFollow,
-    toggleSaveshelf,
     getUserStory
 }

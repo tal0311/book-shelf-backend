@@ -9,16 +9,16 @@ import { ObjectId } from 'mongodb';
 
 async function query(filterBy = { txt: '', userFilter: '', userId: '' }) {
     try {
-        logger.info('global.defaultUser:', global.defaultUser)
-        let criteria = {}
-        if (filterBy.txt || filterBy.userFilter === 'shelf') {
-            criteria = buildCriteria(filterBy);
-            console.log('criteria:', criteria)
-        }
+        // logger.info('global.defaultUser:', global.defaultUser)
+        // let criteria = {}
+        // if (filterBy.txt || filterBy.userFilter === 'shelf') {
+        //     criteria = buildCriteria(filterBy);
+        //     console.log('criteria:', criteria)
+        // }
 
-        if (filterBy.userId && filterBy.userFilter === 'saved-shelfs') {
-            return await userCriteria(filterBy.userId);
-        }
+        // if (filterBy.userId && filterBy.userFilter === 'saved-shelfs') {
+        //     return await userCriteria(filterBy.userId);
+        // }
 
         const collection = await dbService.getCollection('shelf');
         var shelfs = await collection.aggregate(criteria).toArray();

@@ -1,11 +1,11 @@
+import asyncLocalStorage from '../../services/als.service.js';
+import dbService from '../../services/db.service.js';
+import logger from '../../services/logger.service.js';
+import { ObjectId } from 'mongodb';
 
-const asyncLocalStorage = require('../../services/als.service')
-const dbService = require('../../services/db.service')
-const logger = require('../../services/logger.service')
-const ObjectId = require('mongodb').ObjectId
 
 
-module.exports = {
+export default {
     query,
     getById,
     getByUsername,
@@ -15,7 +15,7 @@ module.exports = {
     setTags,
     updateUserTags,
     toggleUserFollow,
-    toggleSaveshelf
+
 }
 
 async function query(filterBy = {}) {
