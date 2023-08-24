@@ -1,24 +1,24 @@
-const shelfService = require('./shelf.service.js')
-const logger = require('../../services/logger.service.js')
-const { getByUsername } = require('../user/user.service.js')
+import shelfService from './shelf.service.js';
+import logger from '../../services/logger.service.js';
+import { getByUsername } from '../user/user.service.js';
 
-async function getshelfs(req, res) {
+
+async function getShelves(req, res) {
   try {
-    logger.info('Getting shelfs')
+    logger.info('Getting shelves')
+    // get filter from query params
     const filterBy = {
-      txt: req.query.txt || '',
-      userFilter: req.query.userFilter || '',
-      userId: req.query.userId || ''
+      txt: req.query?.txt || '',
     }
-    const shelfs = await shelfService.query(filterBy)
-    res.json(shelfs)
+    const shelves = await shelfService.query()
+    res.json(shelves)
   } catch (err) {
-    logger.error('Failed to get shelfs', err)
-    res.status(500).send({ err: 'Failed to get shelfs' })
+    logger.error('Failed to get shelves', err)
+    res.status(500).send({ err: 'Failed to get shelves' })
   }
 }
 
-async function getshelfById(req, res) {
+async function getShelfById(req, res) {
   try {
     const shelfId = req.params.id
     const shelf = await shelfService.getById(shelfId)
@@ -30,7 +30,7 @@ async function getshelfById(req, res) {
   }
 }
 
-async function addshelf(req, res) {
+async function addShelf(req, res) {
 
 
   const { loggedinUser } = req
@@ -55,7 +55,7 @@ async function addshelf(req, res) {
   }
 }
 
-async function updateshelf(req, res) {
+async function updateShelf(req, res) {
   try {
     const shelf = req.body
     const updatedshelf = await shelfService.update(shelf)
@@ -67,7 +67,7 @@ async function updateshelf(req, res) {
   }
 }
 
-async function removeshelf(req, res) {
+async function removeShelf(req, res) {
   try {
     const shelfId = req.params.id
     const removedId = await shelfService.remove(shelfId)
@@ -79,7 +79,7 @@ async function removeshelf(req, res) {
   }
 }
 
-async function addshelfComment(req, res) {
+async function addShelfComment(req, res) {
   const { loggedinUser } = req
 
   try {
@@ -101,7 +101,7 @@ async function addshelfComment(req, res) {
   }
 }
 
-async function addshelfLike(req, res) {
+async function addShelfLike(req, res) {
   const { id: shelfId } = req.params
   let { loggedinUser } = req
   if (!loggedinUser) loggedinUser = global.defaultUser
@@ -118,12 +118,12 @@ async function addshelfLike(req, res) {
 }
 
 
-module.exports = {
-  getshelfs,
-  getshelfById,
-  addshelf,
-  updateshelf,
-  removeshelf,
-  addshelfComment,
-  addshelfLike
+export default {
+  getShelves,
+  getShelfById,
+  addShelf,
+  updateShelf,
+  removeShelf,
+  addShelfComment,
+  addShelfLike
 }

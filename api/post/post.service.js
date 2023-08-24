@@ -1,10 +1,11 @@
 
-const dbService = require('../../services/db.service')
-const logger = require('../../services/logger.service')
-const utilService = require('../../services/util.service')
-const userService = require('../user/user.service')
-const socketService = require('../../services/socket.service')
-const ObjectId = require('mongodb').ObjectId
+import dbService from '../../services/db.service.js';
+import logger from '../../services/logger.service.js';
+import utilService from '../../services/util.service.js';
+import userService from '../user/user.service.js';
+import socketService from '../../services/socket.service.js';
+import { ObjectId } from 'mongodb';
+
 
 async function query(filterBy = { txt: '', userFilter: '', userId: '' }) {
     try {
@@ -149,7 +150,7 @@ async function update(shelf) {
     }
 }
 
-async function addshelfComment(shelfId, comment) {
+async function addShelfComment(shelfId, comment) {
     try {
         comment.id = utilService.makeId()
         const collection = await dbService.getCollection('shelf')
@@ -169,7 +170,7 @@ async function addshelfComment(shelfId, comment) {
     }
 }
 
-async function addshelfLike(shelfId, user) {
+async function addShelfLike(shelfId, user) {
     try {
         const like = {
             userId: user._id,
@@ -238,18 +239,18 @@ async function _addToUserNotifications(shelf, byUser, noteType) {
 }
 
 // helpers
-function _getshelfTags(txt) {
+function _getShelfTags(txt) {
     if (!txt) return []
     return txt.split(' ').filter(word => word.startsWith('#')).map(tag => tag.substring(1).trim())
 }
 
 
-module.exports = {
+export default {
     remove,
     query,
     getById,
     add,
     update,
-    addshelfComment,
-    addshelfLike
+    addShelfComment,
+    addShelfLike
 }
