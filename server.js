@@ -31,8 +31,7 @@ global.defaultUser = {
 import authRoutes from './api/auth/auth.routes.js';
 import userRoutes from './api/user/user.routes.js';
 import shelfRoutes from './api/shelf/shelf.routes.js';
-// import notesRoutes from './api/notification/notes.routes.js';
-// import msgRoutes from './api/msg/msg.routes.js';
+import bookRoutes from './api/book/book.routes.js';
 import { setupSocketAPI } from './services/socket.service.js';
 
 
