@@ -7,6 +7,7 @@ import { createServer } from 'http';
 
 
 
+
 const app = express()
 const http = createServer(app);
 
@@ -18,7 +19,7 @@ app.use(express.json())
 
 
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.resolve(__dirname, 'public')))
+    app.use(express.static(path.resolve('public')))
 } else {
     app.use(cors(config.corsOptions))
 }
@@ -43,7 +44,7 @@ app.all('*', setupAsyncLocalStorage)
 app.use('/api/auth', authRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/shelf', shelfRoutes)
-// app.use('/api/note', notesRoutes)
+app.use('/api/book', bookRoutes)
 // app.use('/api/msg', msgRoutes)
 setupSocketAPI(http)
 
@@ -51,7 +52,7 @@ setupSocketAPI(http)
 // so when requesting http://localhost:3030/index.html/shelf/123 it will still respond with
 // our SPA (single page app) (the index.html file) and allow vue/react-router to take it from there
 app.get('/**', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'))
+    res.sendFile(path.resolve('public/index.html'))
 })
 
 
