@@ -5,13 +5,14 @@ import { getByUsername } from '../user/user.service.js';
 
 export async function getShelves(req, res) {
   try {
-    logger.info('Getting shelves')
-    // get filter from query params
-    const filterBy = {
-      txt: req.query?.txt || '',
-    }
+    // logger.info('Getting shelves')
+    // // get filter from query params
+    // const filterBy = {
+    //   txt: req.query?.txt || '',
+    // }
     const shelves = await shelfService.query()
     res.json(shelves)
+    // res.json('get Shelves')
   } catch (err) {
     logger.error('Failed to get shelves', err)
     res.status(500).send({ err: 'Failed to get shelves' })

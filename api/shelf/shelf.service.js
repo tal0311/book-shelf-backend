@@ -5,30 +5,26 @@ import utilService from '../../services/util.service.js';
 import userService from '../user/user.service.js';
 import socketService from '../../services/socket.service.js';
 import pkg from 'mongodb';
+
 const { ObjectId } = pkg;
 
 
 async function query(filterBy = { txt: '', userFilter: '', userId: '' }) {
     try {
-        // logger.info('global.defaultUser:', global.defaultUser)
-        // let criteria = {}
-        // if (filterBy.txt || filterBy.userFilter === 'shelf') {
-        //     criteria = buildCriteria(filterBy);
-        //     console.log('criteria:', criteria)
-        // }
 
-        // if (filterBy.userId && filterBy.userFilter === 'saved-shelfs') {
-        //     return await userCriteria(filterBy.userId);
-        // }
-
+        const criteria = [
+            { $project: { title: 1, desc: 1, booksCount: { $size: "$books" } } }
+        ]
         const collection = await dbService.getCollection('shelf');
-        var shelfs = await collection.aggregate(criteria).toArray();
-        console.log('shelfs:', shelfs.length)
+        var shelves = await collection.find().toArray();
+        console.debug('♠️ ~ file: shelf.service.js:20 ~ query ~ shelves:', shelves)
+        console.debug('♠️ ~ file: shelf.service.js:20 ~ query ~ shelves:', await collection.find({}))
+
         // set tags and user update 
-        userService.setTags(shelfs)
-        return shelfs;
+        // userService.setTags(shelves)
+        return shelves;
     } catch (err) {
-        logger.error('cannot find shelfs', err);
+        logger.error('cannot find shelves', err);
         throw err;
     }
 }
