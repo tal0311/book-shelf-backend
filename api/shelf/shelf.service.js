@@ -16,9 +16,7 @@ async function query(filterBy = { txt: '', userFilter: '', userId: '' }) {
             { $project: { title: 1, desc: 1, booksCount: { $size: "$books" } } }
         ]
         const collection = await dbService.getCollection('shelf');
-        var shelves = await collection.find().toArray();
-        console.debug('♠️ ~ file: shelf.service.js:20 ~ query ~ shelves:', shelves)
-        console.debug('♠️ ~ file: shelf.service.js:20 ~ query ~ shelves:', await collection.find({}))
+        var shelves = await collection.aggregate(criteria).toArray();
 
         // set tags and user update 
         // userService.setTags(shelves)
