@@ -62,9 +62,11 @@ export async function addShelf(req, res) {
 
 export async function updateShelf(req, res) {
   try {
+    
     const shelf = req.body
-    const updatedshelf = await shelfService.update(shelf)
-    res.json(updatedshelf)
+    shelf._id =req.params.id
+    const updatedShelf = await shelfService.update(shelf)
+    res.json(updatedShelf)
   } catch (err) {
     logger.error('Failed to update shelf', err)
     res.status(500).send({ err: 'Failed to update shelf' })

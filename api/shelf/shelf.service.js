@@ -133,10 +133,11 @@ async function add(shelf) {
 async function update(shelf) {
     try {
         // TODO: VALIDATE shelf FROM BODY
+        
         const shelfId = shelf._id
         delete shelf._id
         const collection = await dbService.getCollection('shelf')
-        await collection.updateOne({ _id: ObjectId(shelfId) }, { $set: shelf })
+        await collection.updateOne({ _id:new ObjectId(shelfId) }, { $set: shelf })
         shelf._id = shelfId
         return shelf
     } catch (err) {
