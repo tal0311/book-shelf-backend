@@ -99,7 +99,7 @@ function buildCriteria({ txt, userFilter, userId }) {
 async function getById(shelfId) {
     try {
         const collection = await dbService.getCollection('shelf')
-        const shelf = collection.findOne({ _id: ObjectId(shelfId) })
+        const shelf = collection.findOne({ _id: new ObjectId(shelfId) })
         return shelf
     } catch (err) {
         logger.error(`while finding shelf ${shelfId}`, err)
@@ -120,7 +120,7 @@ async function remove(shelfId) {
 
 async function add(shelf) {
     try {
-        shelf.tags = [..._getshelfTags(shelf.txt)]
+        // shelf.tags = [..._getshelfTags(shelf.txt)]
         const collection = await dbService.getCollection('shelf')
         await collection.insertOne(shelf)
         return shelf

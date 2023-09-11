@@ -21,10 +21,11 @@ export async function getShelves(req, res) {
 
 export async function getShelfById(req, res) {
   try {
-    const shelfId = req.params.id
+    const {id:shelfId} = req.params
     const shelf = await shelfService.getById(shelfId)
 
     res.json(shelf)
+    // res.json(shelfId)
   } catch (err) {
     logger.error('Failed to get shelf', err)
     res.status(500).send({ err: 'Failed to get shelf' })
@@ -38,17 +39,20 @@ export async function addShelf(req, res) {
   // TODO:  VALIDATE shelf FROM BODY
   try {
 
-    const { _id, username, imgUrl, fullname } = loggedinUser
-    const by = {
-      _id,
-      username,
-      imgUrl,
-      fullname
+    const { _id} = loggedinUser
+    
+    const {title, desc, createdAt, imgUrl , ownerId, books} = req.body
+    const shelf = {
+      title,
+      desc,
+      createdAt,
+      imgUrl: imgUrl || './../../assets/NoPicture.png',
+      books,
+      ownerId : _id
     }
-    const shelf = req.body
-    shelf.by = by
-    const addedshelf = await shelfService.add(shelf)
-    res.json(addedshelf)
+    const addedShelf = await shelfService.add(shelf)
+    // res.json(addedShelf)
+    res.json(shelf)
     // res.end()
   } catch (err) {
     logger.error('Failed to add shelf', err)
