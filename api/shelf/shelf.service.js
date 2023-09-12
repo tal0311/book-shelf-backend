@@ -110,7 +110,7 @@ async function getById(shelfId) {
 async function remove(shelfId) {
     try {
         const collection = await dbService.getCollection('shelf')
-        await collection.deleteOne({ _id: ObjectId(shelfId) })
+        await collection.deleteOne({ _id: new ObjectId(shelfId) })
         return shelfId
     } catch (err) {
         logger.error(`cannot remove shelf ${shelfId}`, err)
@@ -133,11 +133,11 @@ async function add(shelf) {
 async function update(shelf) {
     try {
         // TODO: VALIDATE shelf FROM BODY
-        
+
         const shelfId = shelf._id
         delete shelf._id
         const collection = await dbService.getCollection('shelf')
-        await collection.updateOne({ _id:new ObjectId(shelfId) }, { $set: shelf })
+        await collection.updateOne({ _id: new ObjectId(shelfId) }, { $set: shelf })
         shelf._id = shelfId
         return shelf
     } catch (err) {

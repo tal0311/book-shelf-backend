@@ -35,7 +35,7 @@ export async function requireOwner(req, res, next) {
   const { loggedinUser } = asyncLocalStorage.getStore()
   if (!loggedinUser) return res.status(401).send('Not Authenticated')
   const shelf = await shelfService.getById(req.params.id)
-  if (loggedinUser._id !== shelf.by._id) {
+  if (loggedinUser._id !== shelf.ownerId) {
     logger.warn(loggedinUser.fullname + 'attempted to perform owner action')
     res.status(403).end('Not Authorized')
     return

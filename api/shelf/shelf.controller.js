@@ -21,7 +21,7 @@ export async function getShelves(req, res) {
 
 export async function getShelfById(req, res) {
   try {
-    const {id:shelfId} = req.params
+    const { id: shelfId } = req.params
     const shelf = await shelfService.getById(shelfId)
 
     res.json(shelf)
@@ -39,16 +39,16 @@ export async function addShelf(req, res) {
   // TODO:  VALIDATE shelf FROM BODY
   try {
 
-    const { _id} = loggedinUser
-    
-    const {title, desc, createdAt, imgUrl , ownerId, books} = req.body
+    const { _id } = loggedinUser
+
+    const { title, desc, createdAt, imgUrl, ownerId, books } = req.body
     const shelf = {
       title,
       desc,
       createdAt,
       imgUrl: imgUrl || './../../assets/NoPicture.png',
       books,
-      ownerId : _id
+      ownerId: _id
     }
     const addedShelf = await shelfService.add(shelf)
     // res.json(addedShelf)
@@ -62,9 +62,9 @@ export async function addShelf(req, res) {
 
 export async function updateShelf(req, res) {
   try {
-    
+
     const shelf = req.body
-    shelf._id =req.params.id
+    shelf._id = req.params.id
     const updatedShelf = await shelfService.update(shelf)
     res.json(updatedShelf)
   } catch (err) {
@@ -76,13 +76,12 @@ export async function updateShelf(req, res) {
 
 export async function removeShelf(req, res) {
   try {
-    const shelfId = req.params.id
+    const { id: shelfId } = req.params
     const removedId = await shelfService.remove(shelfId)
     res.send(removedId)
   } catch (err) {
     logger.error('Failed to remove shelf', err)
-    res.status(401).send({ err: 'Unauthorized' })
-
+    res.status(401).send({ err: 'Unauthorized to remove this item' })
   }
 }
 
