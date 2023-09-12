@@ -33,6 +33,7 @@ import authRoutes from './api/auth/auth.routes.js';
 import userRoutes from './api/user/user.routes.js';
 import shelfRoutes from './api/shelf/shelf.routes.js';
 import bookRoutes from './api/book/book.routes.js';
+import notesRoutes from './api/notification/notes.routes.js';
 import { setupSocketAPI } from './services/socket.service.js';
 
 
@@ -45,6 +46,7 @@ app.use('/api/auth', authRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/shelf', shelfRoutes)
 app.use('/api/book', bookRoutes)
+app.use('/api/note', notesRoutes)
 // app.use('/api/msg', msgRoutes)
 setupSocketAPI(http)
 

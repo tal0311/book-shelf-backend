@@ -1,18 +1,13 @@
-const dbService = require('../../services/db.service')
-const logger = require('../../services/logger.service')
-const utilService = require('../../services/util.service')
+import dbService from '../../services/db.service.js'
+import logger from '../../services/logger.service.js'
+import utilService from '../../services/util.service.js'
 import pkg from 'mongodb';
 const { ObjectId } = pkg;
 
-async function query(filterBy = { txt: '' }) {
+async function query(userId) {
     try {
-        const criteria = {
-            txt: { $regex: '', $options: 'i' }
-        }
-
         const collection = await dbService.getCollection('note')
-        var notes = await collection.find(criteria).toArray()
-        console.log('shelfs:', shelfs.length)
+        var notes = await collection.find({ ownerId: userId }).toArray()
         return notes
     } catch (err) {
         logger.error('cannot find shelfs', err)
@@ -20,27 +15,11 @@ async function query(filterBy = { txt: '' }) {
     }
 }
 
-async function getById(userId) {
-    try {
-        const collection = await dbService.getCollection('notificatioens');
-        const notes = await collection.aggregate([
-            {
-                $project: { [userId]: 1 }
-            }
-        ]).toArray();
-        return notes;
-    } catch (err) {
-        console.error('Error while finding note', err);
-        throw err;
-    }
-}
-
-
-async function add(note) {
+async function add(note, userId) {
     try {
         const collection = await dbService.getCollection('note')
-        await collection.insertOne(note)
-        return note
+        const notes = await collection.updateOne({ ownerId: userId }, { $push: { notifications: note } })
+        return notes
     } catch (err) {
         logger.error('cannot insert note', err)
         throw err
@@ -51,5 +30,4 @@ async function add(note) {
 export default {
     query,
     add,
-    getById
 }
