@@ -21,7 +21,7 @@ export async function getShelves(req, res) {
 
 export async function getShelfById(req, res) {
   try {
-    const { id: shelfId } = req.params
+    const { shelfId } = req.params
     const shelf = await shelfService.getById(shelfId)
 
     res.json(shelf)
@@ -64,7 +64,6 @@ export async function updateShelf(req, res) {
   try {
 
     const shelf = req.body
-    shelf._id = req.params.id
     const updatedShelf = await shelfService.update(shelf)
     res.json(updatedShelf)
   } catch (err) {
@@ -76,7 +75,7 @@ export async function updateShelf(req, res) {
 
 export async function removeShelf(req, res) {
   try {
-    const { id: shelfId } = req.params
+    const { shelfId } = req.params
     const removedId = await shelfService.remove(shelfId)
     res.send(removedId)
   } catch (err) {

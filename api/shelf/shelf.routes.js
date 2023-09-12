@@ -18,11 +18,11 @@ const router = express.Router()
 // router.use(requireAuth)
 
 router.get('/', log, getShelves)
-router.get('/:id', getShelfById)
+router.get('/:shelfId', getShelfById)
 router.post('/', requireAuth, addShelf)
-router.put('/:id', requireAuth, updateShelf)
-// router.put('/:id/comment', requireAuth, addShelfComment)
-// router.put('/:id/like', requireAuth, addShelfLike)
-router.delete('/:id', requireOwner, removeShelf)
+router.put('/:shelfId', requireAuth, updateShelf)
+// router.put('/:shelfId/comment', requireAuth, addShelfComment)
+// router.put('/:shelfId/like', requireAuth, addShelfLike)
+router.delete('/:shelfId', requireOwner, removeShelf)
 
 export default router
