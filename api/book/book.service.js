@@ -35,7 +35,11 @@ async function remove(bookId, shelfId) {
 async function add(book, shelfId) {
     try {
         const collection = await dbService.getCollection(collectionName)
-        const shelf = await collection.findOneAndUpdate({ _id: ObjectId(shelfId) }, { $push: { books: book } })
+        const shelf = await collection.findOneAndUpdate(
+            { _id: new ObjectId(shelfId), 'books.bookId': { $ne: book.bookId } },
+            { $addToSet: { 'books': book } },
+            { returnOriginal: false, returnDocument: 'after' }
+        );
         return shelf
     } catch (err) {
         logger.error('cannot insert shelf', err)
@@ -43,13 +47,15 @@ async function add(book, shelfId) {
     }
 }
 
-async function update(shelf) {
+async function update(shelf, bookId, updatedBook) {
     try {
-
         const shelfId = shelf._id
-        delete shelf._id
         const collection = await dbService.getCollection(collectionName)
-        await collection.updateOne({ _id: ObjectId(shelfId) }, { $set: shelf })
+        const updatedShelf = await collection.findOneAndUpdate(
+            { _id: new ObjectId(shelfId), 'books.bookId': bookId },
+            { $set: { 'books.$': updatedBook } },
+            { returnDocument: 'after' }
+        );
         shelf._id = shelfId
         return shelf
     } catch (err) {

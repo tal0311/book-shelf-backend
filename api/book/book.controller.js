@@ -15,11 +15,17 @@ export async function getBookById(req, res) {
 }
 
 export async function addBook(req, res) {
-  const { loggedinUser, shelfId } = req
+  const { loggedinUser } = req
+  if (!loggedinUser) loggedinUser = global.defaultUser
+  const { shelfId } = req.params
   // TODO:  VALIDATE book FROM BODY`
   try {
-    const book = req.body
+    const { bookId, title, desc, link, imgUrl, createdAt } = req.body
+    const book = {
+      bookId, title, desc, link, imgUrl, createdAt,
+    }
     const addedBook = await bookService.add(book, shelfId)
+    // res.json(book)
     res.json(addedBook)
     // res.end()
   } catch (err) {

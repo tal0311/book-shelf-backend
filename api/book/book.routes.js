@@ -20,7 +20,7 @@ const router = express.Router()
 router.get('/:shelfId/:bookId', getBookById)
 router.get('/meta', metaMiddleware, scrapMetaData)
 router.post('/:shelfId', requireAuth, addBook)
-router.put('/:id', requireAuth, updateBook)
+router.put('/:shelfId/:bookId', requireAuth, updateBook)
 router.put('/:shelfId/:bookId/like', requireAuth, addBookLike)
 router.delete('/:shelfId/:bookId', requireOwner, removeBook)
 

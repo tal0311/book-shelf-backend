@@ -21,8 +21,8 @@ router.get('/', log, getShelves)
 router.get('/:id', getShelfById)
 router.post('/', requireAuth, addShelf)
 router.put('/:id', requireAuth, updateShelf)
-router.put('/:id/comment', requireAuth, addShelfComment)
-router.put('/:id/like', requireAuth, addShelfLike)
+// router.put('/:id/comment', requireAuth, addShelfComment)
+// router.put('/:id/like', requireAuth, addShelfLike)
 router.delete('/:id', requireOwner, removeShelf)
 
 export default router
