@@ -32,6 +32,7 @@ export function requireAdmin(req, res, next) {
 }
 
 export async function requireOwner(req, res, next) {
+  req.params.id = req.params.id || req.params.shelfId
   const { loggedinUser } = asyncLocalStorage.getStore()
   if (!loggedinUser) return res.status(401).send('Not Authenticated')
   const shelf = await shelfService.getById(req.params.id)

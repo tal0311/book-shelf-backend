@@ -48,16 +48,14 @@ export async function updateBook(req, res) {
 
 export async function removeBook(req, res) {
   try {
-    const { bookId, shelfId } = req.params.id
-    const removedId = await bookService.remove(bookId, shelfId)
-    res.send(removedId)
+    const { bookId, shelfId } = req.params
+    const updatedShelf = await bookService.remove(bookId, shelfId)
+    res.json(updatedShelf)
   } catch (err) {
     logger.error('Failed to remove book', err)
     res.status(401).send({ err: 'Unauthorized' })
-
   }
 }
-
 
 export async function addBookLike(req, res) {
   const { bookId, shelfId } = req.params

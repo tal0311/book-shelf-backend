@@ -24,10 +24,14 @@ async function getById(bookId, shelfId) {
 async function remove(bookId, shelfId) {
     try {
         const collection = await dbService.getCollection(collectionName)
-        await collection.deleteOne({ _id: ObjectId(shelfId) })
-        return shelfId
+        const updatedShelf = await collection.findOneAndUpdate(
+            { _id: new ObjectId(shelfId) },
+            { $pull: { 'books': { bookId: bookId } } },
+            { returnDocument: 'after' }
+        );
+        return updatedShelf
     } catch (err) {
-        logger.error(`cannot remove shelf ${shelfId}`, err)
+        logger.error(`cannot remove book ${bookId} ${shelfId}`, err)
         throw err
     }
 }

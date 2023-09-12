@@ -21,7 +21,7 @@ router.get('/:shelfId/:bookId', getBookById)
 router.get('/meta', metaMiddleware, scrapMetaData)
 router.post('/:shelfId', requireAuth, addBook)
 router.put('/:shelfId/:bookId', requireAuth, updateBook)
-router.put('/:shelfId/:bookId/like', requireAuth, addBookLike)
+// router.put('/:shelfId/:bookId/like', requireAuth, addBookLike)
 router.delete('/:shelfId/:bookId', requireOwner, removeBook)
 
 export default router
