@@ -51,17 +51,15 @@ async function add(book, shelfId) {
     }
 }
 
-async function update(shelf, bookId, updatedBook) {
+async function update(shelfId, bookId, updatedBook) {
     try {
-        const shelfId = shelf._id
         const collection = await dbService.getCollection(collectionName)
         const updatedShelf = await collection.findOneAndUpdate(
             { _id: new ObjectId(shelfId), 'books.bookId': bookId },
             { $set: { 'books.$': updatedBook } },
             { returnDocument: 'after' }
         );
-        shelf._id = shelfId
-        return shelf
+        return updatedShelf
     } catch (err) {
         logger.error(`cannot update shelf ${shelfId}`, err)
         throw err

@@ -2,6 +2,7 @@ import bookService from './book.service.js';
 import logger from '../../services/logger.service.js';
 import { getByUsername } from '../user/user.service.js';
 
+// Note in use
 export async function getBookById(req, res) {
   try {
     const { bookId, shelfId } = req.params
@@ -36,8 +37,9 @@ export async function addBook(req, res) {
 
 export async function updateBook(req, res) {
   try {
+    const { shelfId, bookId } = req.params
     const book = req.body
-    const updateBook = await bookService.update(book)
+    const updateBook = await bookService.update(shelfId, bookId, book)
     res.json(updateBook)
   } catch (err) {
     logger.error('Failed to update book', err)
