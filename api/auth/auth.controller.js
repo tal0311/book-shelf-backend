@@ -4,13 +4,16 @@ import logger from '../../services/logger.service.js';
 // TODO: make sure passwords are not logged or getting to the FE
 export async function login(req, res) {
     const { username, password } = req.body
+    console.log('req.body:', req.body)
     try {
         const user = await authService.login(username, password)
         logger.debug('user from login:', user)
         const loginToken = authService.getLoginToken(user)
         const isSecure = process.env.NODE_ENV === 'production' ? true : false
-        res.cookie('loginToken', loginToken, { sameSite: 'None', secure: true })
+        res.cookie('loginToken', loginToken, { sameSite: 'None', secure: false })
+
         res.json(user)
+
 
     } catch (err) {
         logger.error('Failed to Login ' + err)
@@ -27,7 +30,7 @@ export async function signup(req, res) {
         logger.info('User signup:', user)
         const loginToken = authService.getLoginToken(user)
         const isSecure = process.env.NODE_ENV === 'production' ? true : false
-        res.cookie('loginToken', loginToken, { sameSite: 'None', secure: true })
+        res.cookie('loginToken', loginToken, { sameSite: 'None', secure: false })
         res.json(user)
     } catch (err) {
         logger.error('Failed to signup ' + err)
