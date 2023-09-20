@@ -13,7 +13,7 @@ async function query(filterBy = { txt: '', userFilter: '', userId: '' }) {
     try {
 
         const criteria = [
-            { $project: { title: 1, desc: 1, booksCount: { $size: "$books" } } }
+            { $project: { title: 1, desc: 1, imgUrl: 1, createdAt: 1, booksCount: { $size: "$books" } } }
         ]
         const collection = await dbService.getCollection('shelf');
         var shelves = await collection.aggregate(criteria).toArray();
