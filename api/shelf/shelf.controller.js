@@ -62,8 +62,8 @@ export async function addShelf(req, res) {
 
 export async function updateShelf(req, res) {
   try {
-
     const shelf = req.body
+    console.debug('♠️ ~ file: shelf.controller.js:66 ~ updateShelf ~ shelf:', shelf)
     const updatedShelf = await shelfService.update(shelf)
     res.json(updatedShelf)
   } catch (err) {

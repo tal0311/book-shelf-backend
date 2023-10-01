@@ -6,7 +6,8 @@ import shelfService from '../api/shelf/shelf.service.js';
 
 
 export function requireAuth(req, res, next) {
-  const { loggedinUser } = asyncLocalStorage.getStore()
+  let { loggedinUser } = asyncLocalStorage.getStore()
+  if (!loggedinUser) loggedinUser = global.defaultUser
   console.log('loggedinUser', loggedinUser);
   logger.debug('MIDDLEWARE', loggedinUser)
 
@@ -32,12 +33,14 @@ export function requireAdmin(req, res, next) {
 }
 
 export async function requireOwner(req, res, next) {
+
   req.params.id = req.params.id || req.params.shelfId
-  const { loggedinUser } = asyncLocalStorage.getStore()
-  if (!loggedinUser) return res.status(401).send('Not Authenticated')
+  let { loggedinUser } = asyncLocalStorage.getStore()
+  // if (!loggedinUser) return res.status(401).send('Not Authenticated')
+  if (!loggedinUser) loggedinUser = global.defaultUser
   const shelf = await shelfService.getById(req.params.id)
   if (loggedinUser._id !== shelf.ownerId) {
-    logger.warn(loggedinUser.fullname + 'attempted to perform owner action')
+    logger.warn(loggedinUser.fullname + ' attempted to perform owner action')
     res.status(403).end('Not Authorized')
     return
   }

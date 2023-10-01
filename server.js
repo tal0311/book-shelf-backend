@@ -25,7 +25,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 global.defaultUser = {
-    _id: '643d2a0f99553dc5ce88b861', username: 'tal.amit', imgUrl: 'https://res.cloudinary.com/tal-amit-dev/image/upload/v1679772900/Instagram/WhatsApp_Image_2023-03-25_at_22.22.51_1_va5b7q.jpg', fullname: 'Tal Amit',
+    _id: '64fec0e2f56b56fa6e2b3a9f', username: 'tal.amit', imgUrl: 'https://res.cloudinary.com/tal-amit-dev/image/upload/v1679772900/Instagram/WhatsApp_Image_2023-03-25_at_22.22.51_1_va5b7q.jpg', fullname: 'Tal Amit',
 }
 
 
